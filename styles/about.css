@@ -1,0 +1,193 @@
+/* About Page Specific Styles */
+
+.about-hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.about-banner {
+    padding: 50px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about-banner h2 {
+    font-size: 2.8rem;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.logos-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px 0 30px;
+}
+
+.logo-item {
+    text-align: center;
+}
+
+.institution-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.logo-item p {
+    font-weight: 500;
+    color: #555;
+}
+
+.external-links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn-link {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-link:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.mission-section, 
+.activities-section,
+.values-section {
+    padding: 60px 0;
+}
+
+.mission-section {
+    background-color: #fff;
+}
+
+.activities-section {
+    background-color: #f8f9fa;
+}
+
+.values-section {
+    background-color: #fff;
+}
+
+.mission-section h2,
+.activities-section h2,
+.values-section h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.mission-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.activity-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.activity-icon {
+    margin-bottom: 20px;
+}
+
+.activity-icon img {
+    width: 60px;
+    height: 60px;
+}
+
+.activity-card h3 {
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+.values-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.value-item {
+    padding: 25px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.value-item h3 {
+    color: #007bff;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.value-item p {
+    line-height: 1.7;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .about-banner {
+        padding: 30px;
+    }
+    
+    .about-banner h2 {
+        font-size: 2.2rem;
+    }
+    
+    .logos-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .external-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .activities-grid,
+    .values-list {
+        grid-template-columns: 1fr;
+    }
+} 

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="aiNexusApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - AI-Nexus Forum</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- Updated to EmailJS SDK v4 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <script>
+        (function() {
+            // Initialize with your public key
+            emailjs.init("qEzNRNvXUFOfU3Xl9");
+        })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <h1 class="forum-name">Ai Nexus Forum</h1>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class="dropdown">
+                    <a href="teams.html">Teams</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="teams.html#committee">Committee Members</a></li>
+                        <li><a href="teams.html#event">Event Management</a></li>
+                        <li><a href="teams.html#creativity">Creativity</a></li>
+                        <li><a href="teams.html#design">Design</a></li>
+                        <li><a href="teams.html#hospitality">Hospitality</a></li>
+                    </ul>
+                </li>
+                <li><a href="events.html">Events</a></li>
+                <li class="active"><a href="contact.html">Contact Us</a></li>
+                <li><a href="https://abhishekkn.netlify.app/" target="_blank">Developer</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-hero">
+            <div class="contact-banner">
+                <h2>Get in Touch</h2>
+                <p>Connect with AI Nexus Forum</p>
+            </div>
+        </section>
+
+        <section class="contact-icons">
+            <div class="container">
+                <div class="icon-container">
+                    <a href="https://www.instagram.com/ai_nexus_2023?igsh=dWgxNHU5amRqdTZp" target="_blank" class="icon-link">
+                        <div class="icon instagram">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <p>Follow Us on Instagram</p>
+                    </a>
+                    
+                    <a href="https://mailto:ainexus21@gmail.com" class="icon-link">
+                        <div class="icon mail">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <p>Write to Us</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-form-section" ng-controller="ContactController">
+            <div class="container">
+                <h2>Send Us a Message</h2>
+                
+                <div class="success-message" ng-show="isSuccess">
+                    <p><i class="fas fa-check-circle"></i> Your message has been sent successfully!</p>
+                </div>
+                
+                <form class="contact-form" ng-submit="sendEmail()">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required ng-model="contact.name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required ng-model="contact.email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required ng-model="contact.message"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" ng-disabled="isSubmitting">
+                        <span ng-if="!isSubmitting">Send Message</span>
+                        <span ng-if="isSubmitting">Sending...</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Optional Map Section (Placeholder) -->
+        <section class="map-section">
+            <div class="container">
+                <h2>Visit Us</h2>
+                <div class="map-container">
+                    <!-- This is a placeholder for an embedded map -->
+                    <div class="map-placeholder">
+                        <p>Department of Artificial Intelligence and Data Science</p>
+                        <p>Maharaja Institute of Technology</p>
+                        <p>Thandavapura, Nanjanagudu Taluk</p>
+                        <p>Mysuru, Karnataka</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AI-Nexus Forum. All rights reserved.</p>
+    </footer>
+
+    <script>
+        angular.module('aiNexusApp', [])
+        .controller('ContactController', ['$scope', function($scope) {
+            $scope.isSuccess = false;
+            $scope.isSubmitting = false;
+            
+            $scope.contact = {
+                name: '',
+                email: '',
+                message: ''
+            };
+            
+            $scope.sendEmail = function() {
+                $scope.isSubmitting = true;
+                
+                // Updated to use EmailJS SDK v4 syntax
+                emailjs.send('service_tkl4dfk', 'template_zts5tob', {
+                    from_name: $scope.contact.name,
+                    from_email: $scope.contact.email,
+                    message: $scope.contact.message
+                })
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    $scope.isSuccess = true;
+                    $scope.isSubmitting = false;
+                    $scope.contact.name = '';
+                    $scope.contact.email = '';
+                    $scope.contact.message = '';
+                    $scope.$apply();
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(function() {
+                        $scope.isSuccess = false;
+                        $scope.$apply();
+                    }, 5000);
+                    
+                })
+                .catch(function(error) {
+                    console.error('FAILED...', error);
+                    $scope.isSubmitting = false;
+                    $scope.$apply();
+                    alert('Failed to send message. Please try again.');
+                });
+            };
+        }]);
+    </script>
+</body>
+</html>
